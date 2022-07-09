@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "basic_election_poll",
+    "slug": "basic_election_poll",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
