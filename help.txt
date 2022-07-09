@@ -1,0 +1,6 @@
+Para realizar o commit
+
+git add .   -> adiciona todos os arquivos no commit
+git status  -> Verifica o status do commit
+git commit -m "mensagem aqui...."
+git push -u  -> Enviar para o github
