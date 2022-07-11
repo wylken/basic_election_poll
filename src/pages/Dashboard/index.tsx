@@ -1,12 +1,18 @@
 import React from "react";
 import { View, Text } from "react-native";
+
+import { Header } from "../Header";
+import { PollsList } from "../PollsList";
 import {Container} from "./styles"
 
 export function Dashboard(){
     return(
-        <Container>
-            <Text>Dashboard 4</Text>
-        </Container>
+        <>
+            <Header title="Todas as Pesquisas" btnText="+"></Header>
+            <Container>
+                <PollsList/>
+            </Container>
+        </>
     )
 }
 
