@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { MaterialIcons } from '@expo/vector-icons';
 
 export const Container = styled.View`
     height: 60px;
@@ -21,3 +22,4 @@ export const TitleButton = styled.TouchableOpacity`
     padding: 10px;
     border-radius: 5px;
 `;
+

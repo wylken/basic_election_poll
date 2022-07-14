@@ -9,6 +9,7 @@ export const theme = {
         attention_light: 'rgba(232,63,91,0.5)',
         shape: '#FFFFFF',
         title: '#363F5F',
+        line: 'rgba(54, 63, 95,0.1)',
         text: '#969CB2',
         background:'#F0F2F5',
         text_light: '#FFFFFF',
