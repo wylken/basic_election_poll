@@ -1,17 +1,23 @@
 import styled from "styled-components/native";
 
-export const ContainerSucess = styled.TouchableOpacity`
+export const ContainerSucessBlue = styled.TouchableOpacity`
     margin-left: 20px;
     margin-right: 20px;
     min-height: 55px;
-    background-color: ${({theme}) => theme.colors.sucess};
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: ${({theme}) => theme.colors.primary_blue};
     border-radius: 5px;
     align-items: center;
     justify-content: center;
     color: ${({theme}) => theme.colors.text_light};
 `;
 
-export const Container = styled(ContainerSucess)`
+export const ContainerSucess = styled(ContainerSucessBlue)`
+    background-color: ${({theme}) => theme.colors.sucess};
+`;
+
+export const Container = styled(ContainerSucessBlue)`
     background-color: ${({theme}) => theme.colors.background};
 `;
 

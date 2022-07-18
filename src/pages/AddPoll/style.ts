@@ -4,6 +4,7 @@ import {TextInput} from "react-native";
 export const PollNameInput = styled(TextInput)`
     background-color: ${({theme}) => theme.colors.background};
     margin: 20px;
+    margin-bottom: 10px;
     min-height: 55px;
     border-radius: 5px;
     padding: 10px;
