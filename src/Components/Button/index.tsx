@@ -9,19 +9,19 @@ export function Button(props:{text:string, button_style:string}){
         switch (props.button_style) {
             case "sucess_blue":
                 return(
-                    <ContainerSucessBlue>
+                    <ContainerSucessBlue {...props}>
                         <TextButtonLight>{props.text}</TextButtonLight>
                     </ContainerSucessBlue>
                 );
             case "sucess":
                 return(
-                    <ContainerSucess>
+                    <ContainerSucess {...props}>
                         <TextButtonLight>{props.text}</TextButtonLight>
                     </ContainerSucess>
                 );
             default:
                 return(
-                    <Container>
+                    <Container {...props}>
                         <TextButton>{props.text}</TextButton>
                     </Container>
                 );

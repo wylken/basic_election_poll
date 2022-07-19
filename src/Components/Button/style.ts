@@ -11,6 +11,7 @@ export const ContainerSucessBlue = styled.TouchableOpacity`
     align-items: center;
     justify-content: center;
     color: ${({theme}) => theme.colors.text_light};
+    flex:1;
 `;
 
 export const ContainerSucess = styled(ContainerSucessBlue)`
