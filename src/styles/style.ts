@@ -22,7 +22,7 @@ export const Row = styled.View`
 
 
 export const DefaultInput = styled(TextInput)`
-    background-color: ${({theme}) => theme.colors.background};
+    background-color: ${({theme}) => theme.colors.shape};
     margin: 20px;
     margin-bottom: 10px;
     min-height: 55px;

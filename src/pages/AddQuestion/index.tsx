@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {ScrollView, FlatList, Text} from "react-native";
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Button } from "../../Components/Button";
 import {Header} from "../../Components/Header"
@@ -10,25 +11,31 @@ interface Answer {
     text:string;
 }
 
-export function AddQuestion(){
+interface NavigationProps {
+    navigation: NativeStackNavigationProp<any,any>
+};
 
-    const [answers, setAnswers] =  useState<Answer[]>([{id:'1', text:"Wylken aqui..."}]);
+export function AddQuestion({route, navigation}:NavigationProps){
 
+    const [answers, setAnswers] =  useState<Answer[]>([{id:"1", text:"nada"}]);
+    const params = route.params
+
+    useEffect(() => {
+        if(route.params?.singleInputValue){
+            setAnswers([...answers, route.params.singleInputValue])
+        }
+     }, [params]);
 
     function addAnswer(){
-        //var newAnswer = {} as Answer;
-        //newAnswer.id = "1";
-        //newAnswer.text = "Aqui"
-        //setAnswers([...answers,newAnswer])
+        var newAnswer = {} as Answer;
+        newAnswer.id = "10";
+        newAnswer.text = "Aqui"
+        setAnswers([...answers,newAnswer])
         console.log("Adicionar resposta.....")
     }
 
     return(
         <>
-            <Header
-                title="Adicionar Pergunta"
-                icon="arrow-back-sharp"
-            />
             <Container>
                 <Row>
                     <DefaultInput
@@ -45,7 +52,7 @@ export function AddQuestion(){
                     <Button
                         text="Adicionar Resposta"
                         button_style="sucess_blue"
-                        onPress={() => console.log("Adicionar resposta.....")}
+                        onPress={() => navigation.navigate("SingleInput", {placeholder:"Digite a resposta...", screen:"AddQuestion"})}
                     />
                 </Row>
                 <FlatList

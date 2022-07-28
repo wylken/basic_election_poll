@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from "react-native";
 
 import {Container, ContainerSucessBlue, ContainerSucess, TextButton, TextButtonLight} from "./style";
 
-export function Button(props:{text:string, button_style:string, onPress?:any}){
+export function Button(props:{text:string, button_style?:string, onPress?:any}){
 
     const button  = () => {
         switch (props.button_style) {
