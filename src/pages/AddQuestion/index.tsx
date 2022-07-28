@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from "react";
-import {ScrollView, FlatList, Text} from "react-native";
+import {ScrollView, FlatList, Alert } from "react-native";
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import SwipeView from 'react-native-swipeview';
+import { v4 as uuid } from 'uuid';
 
 import { Button } from "../../Components/Button";
 import {Header} from "../../Components/Header"
-import { Container, DefaultInput, Row } from "../../styles/style";
+import { Container, DefaultInput, ListItem, Row, ListItemTitle } from "../../styles/style";
+import {AnswerInterface as Answer} from "../../interfaces/Interfaces"
 
-interface Answer {
-    id: string;
-    text:string;
-}
 
 interface NavigationProps {
     navigation: NativeStackNavigationProp<any,any>
@@ -17,22 +16,25 @@ interface NavigationProps {
 
 export function AddQuestion({route, navigation}:NavigationProps){
 
-    const [answers, setAnswers] =  useState<Answer[]>([{id:"1", text:"nada"}]);
+    const [answers, setAnswers] =  useState<Answer[]>([]);
+    const [title, setTitle] = useState("");
     const params = route.params
 
     useEffect(() => {
+        
         if(route.params?.singleInputValue){
             setAnswers([...answers, route.params.singleInputValue])
         }
+        if(route.params?.answer){
+            setAnswers(route.params.answer.answers)
+            setTitle(route.params.answer.text)
+        }
      }, [params]);
 
-    function addAnswer(){
-        var newAnswer = {} as Answer;
-        newAnswer.id = "10";
-        newAnswer.text = "Aqui"
-        setAnswers([...answers,newAnswer])
-        console.log("Adicionar resposta.....")
-    }
+     function deleteItemById(id:any){
+        const filteredData = answers.filter(item => item.id !== id);
+        setAnswers(filteredData);
+      }
 
     return(
         <>
@@ -40,12 +42,23 @@ export function AddQuestion({route, navigation}:NavigationProps){
                 <Row>
                     <DefaultInput
                         placeholder="Título da pergunta"
+                        value = {title}
+                        onChangeText = {setTitle}
                     />
                 </Row>
                 <Row>
                     <Button
                         text="Salvar"
                         button_style="sucess"
+                        onPress={()=>{
+                            if(title.length > 0){
+                                navigation.navigate("AddPoll", {poll:{id:uuid(), text:title, answers:answers}});
+                            }
+                            else{
+                                Alert.alert("Atenção","Informe um nome para a pergunta!");
+                            }
+                            
+                        }}
                     />
                 </Row>
                 <Row>
@@ -55,15 +68,30 @@ export function AddQuestion({route, navigation}:NavigationProps){
                         onPress={() => navigation.navigate("SingleInput", {placeholder:"Digite a resposta...", screen:"AddQuestion"})}
                     />
                 </Row>
-                <FlatList
-                    data={answers}
-                    renderItem={({item}) => (
-                        <Text key = {item.id}>
-                            {item.text}
-                        </Text>
-                    )}
-                    keyExtractor={answer => answer.id}
-                />
+                <Row>
+                    <FlatList
+                        data={answers}
+                        renderItem={({item}) => (
+                            <SwipeView
+                                key={item.id}
+                                renderVisibleContent={() => 
+                                    <ListItem >
+                                        <ListItemTitle>
+                                            {item.text}
+                                        </ListItemTitle>
+                                    </ListItem>
+                                }
+                                onSwipedLeft={() => deleteItemById(item.id)}
+                                swipeDuration = {300}
+                                swipeToOpenPercent = {40}
+                                disableSwipeToRight = {true}
+                            />
+                                
+
+                        )}
+                        keyExtractor={answer => answer.id}
+                    />
+                </Row>
             </Container>
                    
         </>

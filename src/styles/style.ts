@@ -30,3 +30,20 @@ export const DefaultInput = styled(TextInput)`
     padding: 10px;
     flex: 1;
 `;
+
+export const ListItem = styled.TouchableOpacity`
+    height: 60px;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    border-bottom-width: 1px;
+    border-style: solid;
+    padding-left: 20px;
+    padding-right: 10px;
+    border-bottom-color: ${({theme})=>theme.colors.line};
+    
+`;
+export const ListItemTitle = styled.Text`
+    font-size: 14px;
+    color: ${({theme})=> theme.colors.title};
+`;
