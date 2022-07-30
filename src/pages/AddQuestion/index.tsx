@@ -18,6 +18,7 @@ export function AddQuestion({route, navigation}:NavigationProps){
 
     const [answers, setAnswers] =  useState<Answer[]>([]);
     const [title, setTitle] = useState("");
+    const [id, setId] = useState(0);
     const params = route.params
 
     useEffect(() => {
@@ -25,9 +26,10 @@ export function AddQuestion({route, navigation}:NavigationProps){
         if(route.params?.singleInputValue){
             setAnswers([...answers, route.params.singleInputValue])
         }
-        if(route.params?.answer){
-            setAnswers(route.params.answer.answers)
-            setTitle(route.params.answer.text)
+        if(route.params?.question){
+            setAnswers(route.params.question.answers);
+            setTitle(route.params.question.text);
+            setId(route.params.question.id);
         }
      }, [params]);
 
@@ -52,7 +54,7 @@ export function AddQuestion({route, navigation}:NavigationProps){
                         button_style="sucess"
                         onPress={()=>{
                             if(title.length > 0){
-                                navigation.navigate("AddPoll", {poll:{id:uuid(), text:title, answers:answers}});
+                                navigation.navigate("AddPoll", {question:{id:id, text:title, answers:answers}});
                             }
                             else{
                                 Alert.alert("Atenção","Informe um nome para a pergunta!");
